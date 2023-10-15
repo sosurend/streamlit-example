@@ -3,16 +3,12 @@ import altair as alt
 import math
 import pandas as pd
 import streamlit as st
+from PIL import Image
+#import tensorflow as tf
 
 """
-# Welcome to Streamlit!
+Plant Leaf disease identification using CNN model
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
 
@@ -36,3 +32,50 @@ with st.echo(code_location='below'):
     st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
         .mark_circle(color='#0068c9', opacity=0.5)
         .encode(x='x:Q', y='y:Q'))
+
+
+
+@st.cache(allow_output_mutation=True)
+
+def load_image(image_file):
+	img = Image.open(image_file)
+	return img
+
+def predict(model,image):
+  prediction = model.predict(image)
+  return prediction
+
+st.title("Plant Disease Identification")
+#model=load_model()
+menu = ["Upload","Camera"]
+menuModel = ["Load","API"]
+# choice = st.sidebar.selectbox("Menu",menu)
+
+
+choice=st.sidebar.radio('Options', options=menu)
+
+if choice == "Upload":
+    st.subheader("Upload")
+   # modelChoice = st.radio('Model Options', options=menuModel)
+
+    image_file = st.file_uploader("Upload Images", type=["png","jpg","jpeg"])
+
+
+
+    if image_file is not None:
+        file_details = {"filename":image_file.name, "filetype":image_file.type,"filesize":image_file.size}
+        st.write(file_details)
+        imageLoad=load_image(image_file)
+        st.image(imageLoad,width=250)
+        #st.button('Predict')
+        if st.button('Predict'):
+          st.write ("Test Prediction")
+#prediction = predict(model,imageLoad)
+
+
+if choice == "Camera":
+    st.subheader("Take Picture")
+    picture = st.camera_input("Take a picture")
+
+    if picture is not None:
+        st.image(picture)
