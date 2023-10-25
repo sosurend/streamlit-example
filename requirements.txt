@@ -1,3 +1,10 @@
 altair
 pandas
 streamlit
+tensorflow==2.13.1
+streamlit
+pyngrok==4.1.1
+googletrans==3.1.0a0
+gTTS
+streamlit-feedback
+emoji
