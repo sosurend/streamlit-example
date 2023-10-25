@@ -199,7 +199,7 @@ with col1:
   st.title("Dr.Green")
 
 with col2:
-  st.image('/content/drive/MyDrive/CapstoneGroup6/Notebooks/DrHealthyLeaf.jpeg', width=200)
+  st.image('DrHealthyLeaf.jpeg', width=200)
 
 with col3:
   st.write("")
