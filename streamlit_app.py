@@ -63,6 +63,7 @@ if ufb:
 
 UPLOAD_DIR="/content/upload_dir/"
 INFO_DIR="/content/drive/MyDrive/CapstoneGroup6/PlantInfo/"
+MODEL = "https://drive.google.com/file/d/1xFb1CV3wnyg1UODKbgaauKOpwd2yumkG/view?usp=drive_link"
 
 plantinfo_files = {
   'Apple___Apple_scab' : "AppleScab.txt",
@@ -98,7 +99,8 @@ predend = time.time()
 
 @st.cache_resource
 def load_model():
-  model=tf.keras.models.load_model('/content/drive/MyDrive/CapstoneGroup6/Models/VGG_model.keras')
+  model=tf.keras.load_model(MODEL) 
+  #model=tf.keras.models.load_model('/content/drive/MyDrive/CapstoneGroup6/Models/VGG_model.keras')
   return model
 
 def load_image(image_file):
